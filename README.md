@@ -1,9 +1,10 @@
 AMD Module Dependency Editor
 ============================
 
-AMD Module Editor is a plugin used to ease the editing of your module
-definition's list of dependencies. It provides the ability to add, edit, and
-delete modules from within Sublime Text using your own formatting rules.
+AMD Module Editor is a plugin for Sublime Text 2 used to ease the editing of
+your module definition's list of dependencies. It provides the ability to add,
+edit, and delete modules from within Sublime Text using your own formatting
+rules.
 
 
 Installation
