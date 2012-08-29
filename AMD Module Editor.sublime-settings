@@ -1,0 +1,25 @@
+{
+    // Set to true if you use AMD to load modules into the global namespace and
+    // thus don't need an argument list. The argument list will still be parsed,
+    // but you won't be prompted for an argument.
+    "disableArguments": false,
+
+    "formatting": {
+        "paths": {
+            "startWithNewline": true,
+            "indentLevel": 2,
+            "useSingleQuote": true,
+            "newlineAfterEach": true,
+            "newlineAfterLast": true,
+            "indentLevelAfterLastNewline": 1
+        },
+        "arguments": {
+            "startWithNewline": true,
+            "indentLevel": 2,
+            "newlineAfterEach": true,
+            "newlineAfterLast": true,
+            "indentLevelAfterLastNewline": 1
+        }
+
+    }
+}

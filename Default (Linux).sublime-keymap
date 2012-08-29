@@ -1,0 +1,4 @@
+[
+    { "keys": ["ctrl+alt+a"], "command": "edit_amd_modules", "args": {"action": "edit"} },
+    { "keys": ["ctrl+alt+shift+a"], "command": "edit_amd_modules", "args": {"action": "delete"} }
+]

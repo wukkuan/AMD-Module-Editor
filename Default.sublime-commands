@@ -1,0 +1,19 @@
+[
+
+  {
+    "caption": "AMD Module Editor: Edit Modules",
+    "command": "edit_amd_modules",
+    "args": {
+        "action": "edit"
+    }
+  },
+
+  {
+    "caption": "AMD Module Editor: Delete Modules",
+    "command": "edit_amd_modules",
+    "args": {
+        "action": "delete"
+    }
+  }
+
+]
