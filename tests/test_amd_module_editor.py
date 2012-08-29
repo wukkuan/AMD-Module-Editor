@@ -20,27 +20,20 @@ class TestAMDModuleList(unittest.TestCase):
 
     def setUp(self):
         self.defaultSettings = SettingsProxy({
-            "disableArguments": False,
+            "disable_arguments": False,
 
-            "formatting": SettingsProxy({
+            "paths_start_with_newline": True,
+            "paths_indent_level": 2,
+            "paths_use_single_quote": True,
+            "paths_newline_after_each": True,
+            "paths_newline_after_last": True,
+            "paths_indent_level_after_last_newline": 1,
 
-                "paths": SettingsProxy({
-                    "startWithNewline": True,
-                    "indentLevel": 2,
-                    "useSingleQuote": True,
-                    "newlineAfterEach": True,
-                    "newlineAfterLast": True,
-                    "indentLevelAfterLastNewline": 1
-                    }),
-
-                "arguments": SettingsProxy({
-                    "startWithNewline": True,
-                    "indentLevel": 2,
-                    "newlineAfterEach": True,
-                    "newlineAfterLast": True,
-                    "indentLevelAfterLastNewline": 1
-                    })
-                })
+            "arguments_start_with_newline": True,
+            "arguments_indent_level": 2,
+            "arguments_newline_after_each": True,
+            "arguments_newline_after_last": True,
+            "arguments_indent_level_after_last_newline": 1
             })
 
         self.defaultTabCharacter = "  "
@@ -92,10 +85,8 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_1indentlevel(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        argFormatting = self.defaultSettings.get('formatting').get('arguments')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        argFormatting.set('indentLevel', 1)
-        pathFormatting.set('indentLevel', 1)
+        self.defaultSettings.set('arguments_indent_level', 1)
+        self.defaultSettings.set('paths_indent_level', 1)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-1indentlevel')
@@ -103,10 +94,8 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_2indentlevelafterlastnewline(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        argFormatting = self.defaultSettings.get('formatting').get('arguments')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        argFormatting.set('indentLevelAfterLastNewline', 2)
-        pathFormatting.set('indentLevelAfterLastNewline', 2)
+        self.defaultSettings.set('arguments_indent_level_after_last_newline', 2)
+        self.defaultSettings.set('paths_indent_level_after_last_newline', 2)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-2indentlevelafterlastnewline')
@@ -114,8 +103,7 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_doublequote(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        pathFormatting.set('useSingleQuote', False)
+        self.defaultSettings.set('paths_use_single_quote', False)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-doublequote')
@@ -123,10 +111,8 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_nonewlineaftereach(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        argFormatting = self.defaultSettings.get('formatting').get('arguments')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        argFormatting.set('newlineAfterEach', False)
-        pathFormatting.set('newlineAfterEach', False)
+        self.defaultSettings.set('arguments_newline_after_each', False)
+        self.defaultSettings.set('paths_newline_after_each', False)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-nonewlineaftereach')
@@ -134,10 +120,8 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_nonewlineafterlast(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        argFormatting = self.defaultSettings.get('formatting').get('arguments')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        argFormatting.set('newlineAfterLast', False)
-        pathFormatting.set('newlineAfterLast', False)
+        self.defaultSettings.set('arguments_newline_after_last', False)
+        self.defaultSettings.set('paths_newline_after_last', False)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-nonewlineafterlast')
@@ -145,10 +129,8 @@ class TestAMDModuleList(unittest.TestCase):
 
     def test_settings_nonewlineatstart(self):
         initial = self.getInitialTestString('3modules-singlequotes')
-        argFormatting = self.defaultSettings.get('formatting').get('arguments')
-        pathFormatting = self.defaultSettings.get('formatting').get('paths')
-        argFormatting.set('startWithNewline', False)
-        pathFormatting.set('startWithNewline', False)
+        self.defaultSettings.set('arguments_start_with_newline', False)
+        self.defaultSettings.set('paths_start_with_newline', False)
         modList = AMDModuleList(initial, self.defaultSettings, self.defaultTabCharacter)
         result = str(modList)
         expectedResult = self.getExpectedResultString('settings-nonewlineatstart')

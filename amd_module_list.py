@@ -45,29 +45,27 @@ class AMDModuleList:
         return retval
 
     def generateArgs(self):
-        argSettings = self.settings.get('formatting').get('arguments')
         return self.generateListString(
             self.args,
-            argSettings.get('indentLevel'),
-            argSettings.get('startWithNewline'),
-            argSettings.get('newlineAfterEach'),
-            argSettings.get('newlineAfterLast'),
-            argSettings.get('indentLevelAfterLastNewline'))
+            self.settings.get('arguments_indent_level'),
+            self.settings.get('arguments_start_with_newline'),
+            self.settings.get('arguments_newline_after_each'),
+            self.settings.get('arguments_newline_after_last'),
+            self.settings.get('arguments_indent_level_after_last_newline'))
 
     def generatePaths(self):
-        pathSettings = self.settings.get('formatting').get('paths')
-        if pathSettings.get('useSingleQuote'):
+        if self.settings.get('paths_use_single_quote'):
             quoteStr = "'"
         else:
             quoteStr = '"'
         paths = map(lambda p: quoteStr + str(p) + quoteStr, self.paths)
         return self.generateListString(
             paths,
-            pathSettings.get('indentLevel'),
-            pathSettings.get('startWithNewline'),
-            pathSettings.get('newlineAfterEach'),
-            pathSettings.get('newlineAfterLast'),
-            pathSettings.get('indentLevelAfterLastNewline'))
+            self.settings.get('paths_indent_level'),
+            self.settings.get('paths_start_with_newline'),
+            self.settings.get('paths_newline_after_each'),
+            self.settings.get('paths_newline_after_last'),
+            self.settings.get('paths_indent_level_after_last_newline'))
 
     def generateListString(self, values, indentLevel, startWithNewline,
                            newlineAfterEach, newlineAfterLast,
