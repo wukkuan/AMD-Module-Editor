@@ -12,6 +12,8 @@ Installation
 
 ### Package Control
 
+**Currently Unavailable**
+
 The best way to install AMD Module Dependency Editor is to use [Sublime Package
 Control](http://wbond.net/sublime_packages/package_control). Follow its
 instructions for installation, and use the Package Control: Install Package
