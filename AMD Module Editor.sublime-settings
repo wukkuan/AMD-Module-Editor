@@ -9,7 +9,7 @@
     "paths_use_single_quote": true,
     "paths_newline_after_each": true,
     "paths_newline_after_last": true,
-    "paths_indent_level_after_last_newline": 1
+    "paths_indent_level_after_last_newline": 1,
 
     "arguments_start_with_newline": true,
     "arguments_indent_level": 2,
