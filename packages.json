@@ -6,7 +6,7 @@
             "description": "Easy modification of your AMD/RequireJS module dependency list",
             "author": "William Blasko",
             "homepage": "https://github.com/wukkuan/sublime-amd-module-editor",
-            "last_modified": "2012-08-30 08:03:41",
+            "last_modified": "2012-08-30 15:57:00",
             "platforms": {
                 "*": [
                     {
