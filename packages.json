@@ -16,6 +16,10 @@
                     {
                         "version": "1.0.1",
                         "url": "https://nodeload.github.com/wukkuan/AMD-Module-Editor/zipball/1.0.1"
+                    },
+                    {
+                        "version": "1.0.2",
+                        "url": "https://nodeload.github.com/wukkuan/AMD-Module-Editor/zipball/1.0.2"
                     }
                 ]
             }
