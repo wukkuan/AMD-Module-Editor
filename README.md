@@ -68,6 +68,15 @@ will be overwritten when the plugin updates) to look for examples. Then you can
 edit the user settings and bindings as you please.
 
 
+Issues
+------
+
+If you have any issues, feel free to contact me directly and I'll work to help you through it.
+
+Email/Jabber - williamblasko@gmail.com  
+Twitter - [@wukkuan](https://twitter.com/wukkuan)
+
+
 Running Tests (for developers)
 ------------------------------
 
