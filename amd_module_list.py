@@ -1,5 +1,5 @@
 import re
-from cStringIO import StringIO
+from io import StringIO
 
 
 class AMDModuleList:
@@ -24,7 +24,7 @@ class AMDModuleList:
             pathsGroupString = str(self.requireMatch.group(self.PATHS_GROUP))
             pathsGroupString = pathsGroupString.strip(' \t\n')
             splitPaths = re.split('[\s\n]*,[\s\n]*', pathsGroupString)
-            self.paths = map(removeQuotes, splitPaths)
+            self.paths = list(map(removeQuotes, splitPaths))
 
             self.args = re.split('[\s\n]*,[\s\n]*',
                                  str(self.requireMatch.group(self.ARGS_GROUP)).strip(' \t\n'))
@@ -58,7 +58,7 @@ class AMDModuleList:
             quoteStr = "'"
         else:
             quoteStr = '"'
-        paths = map(lambda p: quoteStr + str(p) + quoteStr, self.paths)
+        paths = [quoteStr + str(p) + quoteStr for p in self.paths]
         return self.generateListString(
             paths,
             self.settings.get('paths_indent_level'),

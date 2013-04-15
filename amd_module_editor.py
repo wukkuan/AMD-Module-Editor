@@ -17,7 +17,7 @@ def formatModuleList(modList, missingArgument, missingPath):
             return t[0]
         else:
             return t[0] + " - " + t[1]
-    return map(combinePathsAndArgs, zip(paths, args))
+    return list(map(combinePathsAndArgs, list(zip(paths, args))))
 
 
 class EditAmdModulesCommand(sublime_plugin.TextCommand):
@@ -49,7 +49,7 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
             return '\t'
 
     def run(self, edit, action="edit"):
-        print action
+        print(action)
         self.settings = sublime.load_settings('AMD Module Editor.sublime-settings')
         self.entireFileRegion = self.view.find(r'(.*\n*)*', 0)
         if self.entireFileRegion == None:
