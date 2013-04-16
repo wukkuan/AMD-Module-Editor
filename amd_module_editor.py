@@ -1,12 +1,8 @@
 import sublime
 import sublime_plugin
+import amd_module_list
 import copy
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-from sublime_version import sublime_major_version
-import amd_module_list
-
-global_modList = None
 
 def formatModuleList(modList, missingArgument, missingPath):
     args = copy.copy(modList.args)
@@ -24,30 +20,21 @@ def formatModuleList(modList, missingArgument, missingPath):
     return list(map(combinePathsAndArgs, list(zip(paths, args))))
 
 
-class SaveModListCommand(sublime_plugin.TextCommand):
-    def run(self, edit_token):
-        pass
-
-    def run_(self, edit_token, args):
-        global global_modList
-
-        edit = self.view.begin_edit(edit_token, self.name(), {})
-
-        argsRange = global_modList.originalArgsRange
-        argsRegion = sublime.Region(argsRange[0], argsRange[1])
-        pathsRange = global_modList.originalPathsRange
-        pathsRegion = sublime.Region(pathsRange[0], pathsRange[1])
-        self.view.replace(edit, argsRegion, global_modList.generateArgs())
-        self.view.replace(edit, pathsRegion, global_modList.generatePaths())
-
-        self.view.end_edit(edit)
-
-
 class EditAmdModulesCommand(sublime_plugin.TextCommand):
     MISSING_ARGUMENT = "[Missing Argument]"
     MISSING_PATH = "[Missing Path]"
     NEW_MODULE = "[Add New Module]"
     DELETE_MODULE = "[Delete A Module]"
+
+    def saveModList(self):
+        argsRange = self.modList.originalArgsRange
+        argsRegion = sublime.Region(argsRange[0], argsRange[1])
+        pathsRange = self.modList.originalPathsRange
+        pathsRegion = sublime.Region(pathsRange[0], pathsRange[1])
+        mainEdit = self.view.begin_edit('edit_modules')
+        self.view.replace(mainEdit, argsRegion, self.modList.generateArgs())
+        self.view.replace(mainEdit, pathsRegion, self.modList.generatePaths())
+        self.view.end_edit(mainEdit)
 
     @property
     def tabCharacter(self):
@@ -61,8 +48,8 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
         else:
             return '\t'
 
-    def run(self, edit_token, action="edit"):
-        global global_modList
+    def run(self, edit, action="edit"):
+        print(action)
         self.settings = sublime.load_settings('AMD Module Editor.sublime-settings')
         self.entireFileRegion = self.view.find(r'(.*\n*)*', 0)
         if self.entireFileRegion == None:
@@ -72,7 +59,6 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
             self.modList = amd_module_list.AMDModuleList(entireFileString,
                                                          self.settings,
                                                          self.tabCharacter)
-            global_modList = self.modList
             if self.modList.args == None or self.modList.paths == None:
                 sublime.error_message("No require statement found.")
                 return
@@ -98,7 +84,7 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
                         self.modList.args[indexChosen] = newArg
                     elif indexChosen == len(self.modList.args):
                         self.modList.args.append(newArg)
-                self.view.run_command("save_mod_list");
+                self.saveModList()
 
             def handlePathChosen(newPath):
                 newPath = newPath.strip(' \t"\'')
@@ -120,7 +106,7 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
                                                              handleArgChosen,
                                                              None, None)
                 else:
-                    self.view.run_command("save_mod_list");
+                    self.saveModList()
 
             if choice == 0:
                 # The user chose to add a new module, so add it to the
@@ -152,6 +138,6 @@ class EditAmdModulesCommand(sublime_plugin.TextCommand):
                 self.modList.paths.pop(indexChosen)
                 if indexChosen < len(self.modList.args):
                     self.modList.args.pop(indexChosen)
-                self.view.run_command("save_mod_list")
+                self.saveModList()
 
         sublime.active_window().show_quick_panel(quickPanelOptions, handleUserSelection)

@@ -1,5 +1,5 @@
 import re
-import io
+from io import StringIO
 
 
 class AMDModuleList:
@@ -70,7 +70,7 @@ class AMDModuleList:
     def generateListString(self, values, indentLevel, startWithNewline,
                            newlineAfterEach, newlineAfterLast,
                            indentLevelAfterLastNewline):
-        buffer = io.StringIO()
+        buffer = StringIO()
         if len(values) > 0:
             indentString = self.indentString(indentLevel)
             for idx, arg in enumerate(values):
