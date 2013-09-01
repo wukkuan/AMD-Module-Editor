@@ -1,9 +1,10 @@
 import sublime
 import sublime_plugin
 import copy
+import sys
+import os
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-from sublime_version import sublime_major_version
 import amd_module_list
 
 global_modList = None
